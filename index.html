@@ -27,7 +27,7 @@
         }
 
         header img {
-            max-width: 20%; /* Ajustar el tamaño de la imagen al 25% de su tamaño original */
+            max-width: 20%;
             height: auto;
             display: block;
             margin: 0 auto;
@@ -44,35 +44,86 @@
             border-color: #ffffff;
         }
 
-        h1, h2, h3 {
+        h1,
+        h2,
+        h3 {
             color: #ffffff;
             transition: color 0.5s ease;
         }
 
-        h1:hover, h2:hover, h3:hover {
+        h1:hover,
+        h2:hover,
+        h3:hover {
             color: #102a41;
+        }
+
+        .fixed-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
         }
 
         nav {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: center;
             background-color: #1e4663;
             padding: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
 
-        nav a {
+        .menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .menu a {
             color: #ffffff;
             text-decoration: none;
-            padding: 10px 20px;
-            margin: 0 10px;
+            padding: 10px 15px;
+            margin: 0 5px;
             border-radius: 5px;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        nav a:hover {
+        .menu a:hover {
             background-color: #204a6e;
             color: #ffffff;
+        }
+
+        .burger-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background-color: #1a1a1a;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .burger-menu div {
+            width: 25px;
+            height: 3px;
+            background-color: #ffffff;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+
+        .burger-menu:hover {
+            background-color: #2c2c2c;
         }
 
         section {
@@ -100,7 +151,7 @@
         }
 
         .course img {
-            max-width: 60%; /* Ajustar el tamaño de la imagen al 25% de su tamaño original */
+            max-width: 60%;
             height: auto;
             border: 2px solid #1e4663;
             border-radius: 8px;
@@ -158,33 +209,56 @@
             text-decoration: underline;
         }
 
-iframe {
-    /* Estilos para el iframe */
-    width: 100%; /* Ocupa el 100% del ancho del contenedor */
-    height: 580px; /* Altura fija, puedes ajustarla según tus necesidades */
-}
+        iframe {
+            width: 100%;
+            height: 580px;
+        }
 
-img {
-    /* Estilos para la imagen */
-    max-width: 100%; /* La imagen no excederá el ancho del contenedor */
-    height: auto; /* La altura se ajusta automáticamente para mantener la proporción original */
-    margin: 10px; /* Márgenes alrededor de la imagen */
-}
-    
-    
-@media only screen and (max-width: 600px) {
-    /* Estilos para pantallas pequeñas */
-    
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 10px;
+        }
 
-    iframe {
-        width: 100%; /* Ocupa el 100% del ancho del contenedor */
-        height: 200px; /* Ajusta la altura para pantallas pequeñas */
-        border: 1px solid #4c6cd698;
-        border-radius: 5px;
-    }
-}
+        @media only screen and (max-width: 600px) {
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
 
-        
+            .menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+            }
+
+            .menu.active {
+                display: flex;
+            }
+
+            .menu a {
+                display: block;
+                width: 100%;
+                margin: 5px 0;
+            }
+
+            .burger-menu {
+                display: flex;
+            }
+
+            .burger-menu.active div:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .burger-menu.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .burger-menu.active div:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+        }
     </style>
 </head>
 
@@ -195,11 +269,37 @@ img {
         <h2>Descubre el Camino hacia tu Bienestar Integral</h2>
     </header>
 
-    <nav>
-        <a href="#cursos">Cursos</a>
-        <a href="#nosotros">Nosotros</a>
-        <a href="#contacto">Contacto</a>
+    <nav class="fixed-menu">
+        <div class="burger-menu" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <ul class="menu">
+            <li><a href="#cursos">Cursos</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#certificaciones">Certificaciones</a></li>
+            <li><a href="#PolíticasdePrivacidad">Políticas de Privacidad</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
     </nav>
+
+    <script>
+        function toggleMenu() {
+            var menu = document.querySelector('.menu');
+            menu.classList.toggle('active');
+        }
+    </script>
+</body>
+
+
+
+
+
+
+
+
+
 
     <section id="cursos">
         <h3>INSTITUTO DE ECUACIÓN Y SALUD MENTAL</h3>
@@ -439,7 +539,47 @@ img {
             <p>Asociación de Formación Holística Andina se enorgullece de proporcionar una experiencia de formación única y accesible a través de nuestro enfoque en línea. Nos dedicamos a formar individuos inspirados y capacitados para enfrentar los desafíos contemporáneos con una mentalidad holística y una sólida base académica.
                 Reconociendo la importancia de la accesibilidad en la educación, nuestra asociación ha adoptado una modalidad de formación en línea que permite a los estudiantes participar en cursos desde cualquier rincón de los Estados Andinos. Nuestro compromiso con la flexibilidad garantiza que la educación de calidad esté al alcance de aquellos que buscan desarrollar sus habilidades y conocimientos, sin importar las barreras geográficas. Estamos presentes en Argentina, Chile, Bolivia, Perú, Ecuador, Colombia, Venezuela y recientemente hemos agregado actividades en Uruguay y Paraguay.
                  Invitamos a todos aquellos que buscan una formación holística de calidad a unirse a nuestra comunidad en línea. Las inscripciones están abiertas,  esperamos ansiosos acompañarlos en su viaje educativo hacia el éxito y el desarrollo personal.<p></p>
-                
+    </section>     
+    <section id="certificaciones">
+        <h3>certificaciones</h3>
+        <img src="https://i.ibb.co/hFqyFzv/25.png">
+        <p>En la actualidad, las terapias holísticas han ganado popularidad como enfoque para la curación y el desarrollo personal. Sin embargo, al carecer de regulaciones y homologaciones, aquellos que buscan un Maestro, Terapeuta o Centro confiable se enfrentan a importantes desafíos debido a la abrumadora variedad de ofertas disponibles.
+            Cuando alguien busca un centro holístico, suele carecer de garantías proporcionadas por un organismo independiente que respalde la competencia del Maestro o Terapeuta, generando así desconfianza en el proceso de selección.
+            En contraste, al optar por un profesional certificado, el futuro alumno o paciente deposita su confianza en las garantías asociadas con prácticas reguladas.
+            </p>
+
+           
+        <h3>Todo terapeuta y/o maestro certificado en nuestra escuela accede a los siguientes beneficios:</h3>
+      
+    <h3>1-Asesoramiento y protección legal sin cargo</h3>
+    <h3>2-Certificado de terapeuta/maestro</h3>
+    <h3>3-Entrega de certificados digitales para que puedan entregarle a sus 10-alumnos con el logo y certificación de la Asociación.</h3>
+    <h3>4-Incluyes tus datos como terapeuta/maestro en la ciudad que te encuentres, en la base publica de nuestra web.</h3>
+    <h3>5-Tarjeta oficial de persona certificada impresa o digital (según quiera cada uno), con la información de la certificación.</h3>
+    <h3>6-Aval de nuestra institución</h3>
+    </section>
+    <section id="PolíticasdePrivacidad">
+
+ <h3>Política de Privacidad de la Asociación de Formación Holística Andina®</h3>
+ <p>La Asociación de Formación Holística Andina® reconoce la importancia de proteger la privacidad de la información personal de sus miembros, clientes y visitantes. Esta política describe cómo la Asociación recopila, utiliza y protege la información personal que recopila.
+    1.	Información Personal Recopilada:
+    •	La Asociación puede recopilar información personal, como nombres, direcciones de correo electrónico, números de teléfono, entre otros, en el curso de sus actividades y servicios.
+    2.	Uso de la Información Personal:
+    •	La Asociación utilizará la información personal recopilada para fines relacionados con sus servicios y actividades, así como para informar a los miembros y clientes sobre eventos, actualizaciones y noticias relevantes.
+    3.	Seguridad de la Información:
+    •	La Asociación implementará medidas de seguridad razonables para proteger la información personal contra accesos no autorizados, divulgación, alteración o destrucción.
+    4.	Derechos de los Titulares de Datos:
+    •	La Asociación reconoce y respeta los derechos fundamentales de los titulares de datos. Estos, en su sabiduría, poseen el derecho inalienable de acceder, corregir, actualizar o eliminar su información personal. Para ejercer estos derechos, se insta a los titulares de datos a comunicarse con la Asociación a través de los canales designados, donde serán atendidos con la seriedad y prontitud que merecen.
+    5.	Derechos de Autor:
+    •	Todos los contenidos, materiales y recursos generados por la Asociación de Formación Holística Andina, desde textos hasta imágenes, videos y documentos, están investidos con la solemnidad de los derechos de autor de la Asociación. Queda, por ende, terminantemente prohibida cualquier forma de reproducción, distribución o uso no autorizado de estos materiales, salvo con el expreso consentimiento por escrito de la Asociación.
+    6.	Limitación de Responsabilidad:
+    •	La Asociación no se hace responsable por el uso no autorizado de la información personal proporcionada por los miembros, clientes o visitantes.
+    Derechos de Autor de la Asociación de Formación Holística Andina®
+    Todos los contenidos, materiales y recursos creados y compartidos por la Asociación de Formación Holística Andina, incluidos pero no limitados a textos, imágenes, videos y documentos, están protegidos por los derechos de autor y de propiedad intelectual. Queda estrictamente prohibida la reproducción, distribución o uso no autorizado de estos materiales sin el consentimiento expreso por escrito de la Asociación con su posterior aprobación del órgano administrativo.
+    Nos amparos en la, Ley Nº 1 1.723 Argentina, Ley Nº 17.336 Chile, Ley Nº 27811 Perú, Ley Nº 2006-16, publicada en el Registro Oficial Suplemento 470 Ecuador, Ley de Derechos de Autor (Ley 23 y 190)  Colombia, Ley  N° 36.261y 38.687 Venezuela, Ley N° 1328/98 Paraguay, Ley N° 9.739 Junto con sus adyacentes de Uruguay.
+    <p>
+    
+
     </section>
 
     <section id="contacto">
